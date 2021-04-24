@@ -1,0 +1,23 @@
+version: '3.5'
+
+services:
+  postgres:
+    image: postgres
+    environment:
+      POSTGRES_USER: pguser
+      POSTGRES_PASSWORD: test
+      PGDATA: /data/postgres-test
+    volumes:
+      - postgres-test:/data/postgres-test
+    ports:
+      - '9999:5432'
+    networks:
+      - postgres-test
+    restart: unless-stopped
+
+networks:
+  postgres-test:
+    driver: bridge
+
+volumes:
+  postgres-test:
